@@ -10,7 +10,8 @@ public interface RetrofitInterface {
 
     @POST("/login")
     Call<LoginResult> executeLogin(@Body HashMap<String, String> map);
-
+    @POST("/gettodo")
+    Call<LoginResult> executeGettodo(@Body HashMap<String, String> map);
     @POST("/signup")
     Call<SignupResult> executeSignup (@Body HashMap<String, String> map);
 

@@ -92,7 +92,7 @@ public class ChatFrag extends Fragment {
 
 
         try {
-            mSocket = IO.socket("http://192.249.18.165:80");
+            mSocket = IO.socket("http://192.249.18.124:443");
             Log.d("SOCKET", "Connection success : " + mSocket.id());
         } catch (URISyntaxException e) {
             e.printStackTrace();

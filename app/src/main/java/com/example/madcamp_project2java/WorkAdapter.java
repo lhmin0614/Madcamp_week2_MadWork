@@ -51,16 +51,19 @@ public class WorkAdapter extends BaseAdapter {
             mViewHolder=(ViewHolder) convertView.getTag();
         }
         mViewHolder.txt_name.setText(workarray.get(position));
+
         mViewHolder.progressbar.setProgress(progressarray.get(position));
-        mViewHolder.progressbar.getIndeterminateDrawable().setColorFilter(Color.argb(0,255,255,37), PorterDuff.Mode.MULTIPLY);
+        mViewHolder.progresstext.setText(progressarray.get(position).toString()+"%");
         return convertView;
     }
     public class ViewHolder {
         private TextView txt_name;
         private ProgressBar progressbar;
+        private TextView progresstext;
         public ViewHolder(View convertView) {
             txt_name = (TextView) convertView.findViewById(R.id.worktext);
             progressbar = (ProgressBar) convertView.findViewById(R.id.progressBar);
+            progresstext=(TextView) convertView.findViewById(R.id.progresstext);
         }
 
     }

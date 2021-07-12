@@ -60,7 +60,6 @@ public class CalendarFrag extends Fragment {
         del_Btn=view.findViewById(R.id.del_Btn);
         cha_Btn=view.findViewById(R.id.cha_Btn);
         textView2=view.findViewById(R.id.textView2);
-        textView3=view.findViewById(R.id.textView3);
         contextEditText=view.findViewById(R.id.contextEditText);
 
         //로그인 및 회원가입 엑티비티에서 이름을 받아옴
@@ -69,7 +68,6 @@ public class CalendarFrag extends Fragment {
         String name="kimjh5182";
         //final String userID=intent.getStringExtra("userID");
         final String userID="kimjh5182";
-        textView3.setText(name+"님의 달력 일기장");
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

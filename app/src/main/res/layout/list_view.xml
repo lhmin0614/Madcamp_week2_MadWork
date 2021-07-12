@@ -3,30 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/todobox"
+    android:elevation="5dp">
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="20dp"
         android:progress="20"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:progressDrawable="@drawable/myprogressbar"
-        app:layout_constraintStart_toStartOf="@+id/worktext"
-        app:layout_constraintTop_toTopOf="@+id/worktext" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/worktext" />
+
+    <TextView
+        android:id="@+id/progresstext"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        tools:text="30%"
+        android:layout_marginHorizontal="20dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:textSize="35dp"
+        android:gravity="center_vertical|right"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/worktext"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="TextView"
-        android:textSize="20dp"
+        android:layout_height="45dp"
+        android:layout_marginHorizontal="20dp"
         android:gravity="center_vertical"
-        android:textColor="@color/black"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_marginTop="3dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="@id/progresstext" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

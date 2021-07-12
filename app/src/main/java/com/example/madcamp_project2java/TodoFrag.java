@@ -86,7 +86,7 @@ public class TodoFrag extends Fragment {
         HashMap<String, String> map = new HashMap<>();
 
         map.put("userID", userID);  //나중에 수정
-        Call<LoginResult> call = retrofitInterface.executeLogin(map);
+        Call<LoginResult> call = retrofitInterface.executeGettodo(map);
 
         call.enqueue(new Callback<LoginResult>() {
             private Context mContext;

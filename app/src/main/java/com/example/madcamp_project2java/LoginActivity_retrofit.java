@@ -38,7 +38,7 @@ public class LoginActivity_retrofit extends AppCompatActivity {
 
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.165:80";
+    private String BASE_URL = "http://192.249.18.124:443";
     //private String BASE_URL = "http://172.10.18.165:80";
     Context mContext;
     Button loginBtn;

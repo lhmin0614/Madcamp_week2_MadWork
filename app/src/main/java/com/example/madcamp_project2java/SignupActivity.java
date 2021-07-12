@@ -26,7 +26,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText emailEdit;
     EditText passwordEdit;
     EditText nameEdit;
-    private String BASE_URL = "http://192.249.18.165:80";
+    private String BASE_URL = "http://192.249.18.124:443";
     //private String BASE_URL = "http://172.10.18.165:80";
 
     @Override

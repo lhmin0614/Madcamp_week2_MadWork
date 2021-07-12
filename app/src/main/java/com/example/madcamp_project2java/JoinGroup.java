@@ -34,7 +34,7 @@ public class JoinGroup extends AppCompatActivity {
     //retrofit elements
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.249.18.165:80";
+    private String BASE_URL = "http://192.249.18.124:443";
 
 
     @Override
