@@ -43,11 +43,14 @@ public class CalendarFrag extends Fragment {
     Integer year;
     Integer month;
     Integer day;
+    String roomNumber;
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
+        Bundle bundle = getArguments();
+        roomNumber = bundle.getString("groupName");
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -105,8 +108,8 @@ public class CalendarFrag extends Fragment {
     public void  checkDay(Integer cYear,Integer cMonth,Integer cDay,String userID){
         try{
             HashMap<String, String> map = new HashMap<>();
-            map.put("group","1"); //===================================================================1 나중에 group number로 수정
-            map.put("date",cYear.toString()+cMonth.toString()+cDay.toString()+'_'+"1"); //===============================================1을 나중에 group number로 수정
+            map.put("group",roomNumber.toString()); //===================================================================1 나중에 group number로 수정
+            map.put("date",cYear.toString()+cMonth.toString()+cDay.toString()+'_'+roomNumber.toString()); //===============================================1을 나중에 group number로 수정
             Call<CalendarResult> call = retrofitInterface.executeCalendar(map);
 
 
@@ -183,8 +186,8 @@ public class CalendarFrag extends Fragment {
     public void removeDiary(Integer cyear,Integer cmonth,Integer cday){
         try{
             HashMap<String, String> map = new HashMap<>();
-            map.put("group","1"); //==================================================================1 나중에 group number로 수정
-            map.put("date",cyear.toString()+cmonth.toString()+cday.toString()+'_'+"1"); //요것도
+            map.put("group",roomNumber.toString()); //==================================================================1 나중에 group number로 수정
+            map.put("date",cyear.toString()+cmonth.toString()+cday.toString()+'_'+roomNumber.toString()); //요것도
             Call<Void> call = retrofitInterface.executeRemovecalendar(map);
             call.enqueue(new Callback<Void>() {
                 private Context mContext;
@@ -213,8 +216,8 @@ public class CalendarFrag extends Fragment {
     public void saveDiary(Integer cyear,Integer cmonth,Integer cday,String text){
         try{
             HashMap<String, String> map = new HashMap<>();
-            map.put("group","1"); //==================================================================1 나중에 group number로 수정
-            map.put("date",cyear.toString()+cmonth.toString()+cday.toString()+'_'+"1");
+            map.put("group",roomNumber.toString()); //==================================================================1 나중에 group number로 수정
+            map.put("date",cyear.toString()+cmonth.toString()+cday.toString()+'_'+roomNumber.toString());
             map.put("text",text);
             Call<Void> call = retrofitInterface.executeSavecalendar(map);
             call.enqueue(new Callback<Void>() {

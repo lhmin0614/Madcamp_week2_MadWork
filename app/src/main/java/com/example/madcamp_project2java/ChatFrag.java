@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,7 +74,8 @@ public class ChatFrag extends Fragment {
         roomNumber = bundle.getString("groupName");
         userID = bundle.getString("UserID");
 
-
+        TextView representingRoom = view.findViewById(R.id.chatsubtitle);
+        representingRoom.setText("Room for "+ roomNumber);
 
         Log.i("init function", "init functioin");
 

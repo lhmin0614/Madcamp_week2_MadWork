@@ -9,6 +9,26 @@
     tools:context="com.example.madcamp_project2java.MainActivity">
 
 
+    <TextView
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:id="@+id/chattitle"
+        android:gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:text="Chat"
+        android:textSize="30dp"
+        android:layout_marginHorizontal="20dp"/>
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/chatsubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="defualt text"
+        android:textSize="16dp"
+        android:layout_below="@id/todotitle"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginBottom="10dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

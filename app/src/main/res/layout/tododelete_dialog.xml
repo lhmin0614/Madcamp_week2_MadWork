@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
 
         android:layout_margin="8dp"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:textColor="@color/black"
         android:text="정말로 삭제하시겠습니까?"
         android:gravity="center_horizontal"
@@ -16,14 +16,14 @@
         android:inputType="numberSigned"/>
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:layout_margin="4dp"
         android:text="Delete this list"
-        android:background="@drawable/roundimage"
-        android:textStyle="bold"
+        android:elevation="10dp"
+        android:background="@drawable/button_background"
         android:id="@+id/deletetodobtn" />
 
 

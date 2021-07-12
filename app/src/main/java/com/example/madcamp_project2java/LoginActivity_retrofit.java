@@ -111,6 +111,8 @@ public class LoginActivity_retrofit extends AppCompatActivity {
                     map.put("id", emailEdit.getText().toString());
                     map.put("pw", passwordEdit.getText().toString());
 
+                    Log.i("id", emailEdit.getText().toString());
+
                     Call<LoginResult> call = retrofitInterface.executeLogin(map);
 
                     call.enqueue(new Callback<LoginResult>() {
