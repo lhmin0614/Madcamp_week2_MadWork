@@ -73,7 +73,7 @@ public class SignupActivity extends AppCompatActivity {
                             //login succes
                             Log.i("login", "login success");
                             Log.i("response", response.toString());
-                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            Intent intent = new Intent(getBaseContext(), JoinGroup.class);
                             intent.putExtra("name", nameEdit.getText().toString());
                             intent.putExtra("UserID", emailEdit.getText().toString());
                             startActivity(intent);

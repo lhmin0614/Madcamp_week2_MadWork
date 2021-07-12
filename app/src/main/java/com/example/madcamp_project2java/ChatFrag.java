@@ -75,6 +75,8 @@ public class ChatFrag extends Fragment {
 
 
 
+        Log.i("init function", "init functioin");
+
         adapter = new ChatAdapter(getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 

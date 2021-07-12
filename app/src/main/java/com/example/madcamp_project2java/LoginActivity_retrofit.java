@@ -87,6 +87,7 @@ public class LoginActivity_retrofit extends AppCompatActivity {
 
             EditText emailEdit = findViewById(R.id.emailEdit);
             EditText passwordEdit = findViewById(R.id.passwordEdit);
+            EditText nameEdit = findViewById(R.id.nameEdit);
 
             //계정등록
             signupBtn  = (Button) findViewById(R.id.signup_button);
@@ -119,6 +120,7 @@ public class LoginActivity_retrofit extends AppCompatActivity {
                                 //login success
                                 String apr_id =  response.body().getApprove_id();
                                 String apr_pw =  response.body().getApprove_pw();
+                                String name = response.body().getName();
                                 Log.i("response detail", apr_id);
                                 Log.i("response detail", apr_pw);
                                 if(apr_id.equals("NO")) {
@@ -129,8 +131,8 @@ public class LoginActivity_retrofit extends AppCompatActivity {
                                     //login success
                                     Log.i("login success", "id password OK");
                                     Intent intent = new Intent(getBaseContext(), JoinGroup.class);
-                                    intent.putExtra("name", "hyemin");
-                                    intent.putExtra("UserID", "lhmin1");
+                                    intent.putExtra("name", response.body().getName());
+                                    intent.putExtra("UserID", emailEdit.getText().toString());
                                     startActivity(intent);
                                 }
                             } else if (response.code() == 404) {
