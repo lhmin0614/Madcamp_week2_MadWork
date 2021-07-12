@@ -47,9 +47,10 @@ var chat_conn = mysql.createConnection({
 //calendar
 app.post('/getcalendar', function (req, res) {
     var date = req.body.date;
+    var group = req.body.group;
     console.log('get date: ' + date);
 
-    connection2.query('select calendartext from calendartable where groupid=? and date=?', [1, date], function (error, results, fields) {
+    connection2.query('select calendartext from calendartable where groupid=? and date=?', [group, date], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
@@ -66,9 +67,10 @@ app.post('/getcalendar', function (req, res) {
 app.post('/savecalendar', function (req, res) {
     var date = req.body.date;
     var text = req.body.text;
+    var group = req.body.group;
     console.log('save date: ' + date);
 
-    connection2.query('insert into calendartable(groupid, date,calendartext) values(?,?,?)ON DUPLICATE KEY update calendartext=?', [1, date, text, text], function (error, results, fields) {
+    connection2.query('insert into calendartable(groupid, date,calendartext) values(?,?,?)ON DUPLICATE KEY update calendartext=?', [group, date, text, text], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
@@ -78,8 +80,9 @@ app.post('/savecalendar', function (req, res) {
 app.post('/removecalendar', function (req, res) {
     var date = req.body.date;
     console.log('delete date: ' + date);
+    var group = req.body.group;
 
-    connection2.query('delete from calendartable where date=? and groupid=?', [date, 1], function (error, results, fields) {
+    connection2.query('delete from calendartable where date=? and groupid=?', [date, group], function (error, results, fields) {
         if (error) {
             console.log(error);
         }
@@ -91,6 +94,7 @@ app.post('/removecalendar', function (req, res) {
 app.post('/work', function (req, res) {
     var work = req.body.work;
     var userID = req.body.userID;
+
     console.log('work text is ' + work + ' and id is' + userID);
     connection.query('insert into todotable(userid, work) values(?,?)', [userID, work], function (error, results, fields) {
         if (error) console.log(error);
@@ -303,17 +307,20 @@ app.post('/login', (req, res) => {
     var sql = "SELECT * FROM user WHERE UserID=?"
     var approve_id = "NO";
     var approve_pw = "NO"
+    var name = ""
 
     connection3.query(sql, [req.body.id], function (error, result, fields) {
         if (error) {
             console.log(error);
         }
+
         else if (result.length > 0) {
             approve_id = "YES";
             if (result[0].UserPassword == req.body.pw)
                 approve_pw = "YES"
+            name = result[0].UserName
         }
-        res.send({ approve_id: approve_id, approve_pw: approve_pw });
+        res.send({ approve_id: approve_id, approve_pw: approve_pw, name: name });
         console.log("Login success");
     })
 })
