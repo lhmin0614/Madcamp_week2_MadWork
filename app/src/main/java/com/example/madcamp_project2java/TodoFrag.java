@@ -125,14 +125,12 @@ public class TodoFrag extends Fragment {
         //Button sendBtn = view.findViewById(R.id.sendworkbutton);
         final EditText sendworktext = getView().findViewById(R.id.sendworktext);
 
-        getView().findViewById(R.id.sendwork).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
+
                 HashMap<String, String> map = new HashMap<>();
-                //Toast.makeText(getApplicationContext(),"dsfasdf",Toast.LENGTH_LONG).show();
-                //보내는 부분
+                //sendworktext.setText("");
                 map.put("work", sendworktext.getText().toString());
                 map.put("userID", userID);
+        sendworktext.setText("");
                 Call<LoginResult> call=retrofitInterface.executeSendText(map);
                 call.enqueue(new Callback<LoginResult>() {
                     private Context mContext;
@@ -160,8 +158,7 @@ public class TodoFrag extends Fragment {
                                 Toast.LENGTH_LONG).show();
                     }
                 });
-            }
-        });
+
 
     }
     private void handlelistclick(final String worktext){
