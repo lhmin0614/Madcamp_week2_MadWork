@@ -19,7 +19,7 @@ public interface RetrofitInterface {
     Call<LoginResult> executegoogleLogin(@Body HashMap<String, String> map);
 
     @POST("/joingroup")
-    Call<JoinGroupResult> executeJoinGroup(@Body HashMap<String, String> map);
+    Call<LoginResult> executeJoinGroup(@Body HashMap<String, String> map);
 
     @POST("/work")
     Call<LoginResult> executeSendText(@Body HashMap<String, String> map);
@@ -38,6 +38,6 @@ public interface RetrofitInterface {
     @POST("/removecalendar")
     Call<Void> executeRemovecalendar(@Body HashMap<String, String> map);
 
-    //@POST("/grouplist")
-    //Call<> executeJoinGroup(@Body HashMap<String, String> map);
+    @POST("/grouplist")
+    Call<JoinGroupResult> executeGroupList(@Body HashMap<String, String> map);
 }
