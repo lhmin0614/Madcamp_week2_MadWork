@@ -1,22 +1,12 @@
 package com.example.madcamp_project2java;
 
+import java.util.ArrayList;
+
 public class JoinGroupResult {
 
-    private String username;
 
-    private String userid;
+    private ArrayList<String> groupids;
 
-    private String groupname;
-
-    private String groupid;
-
-    public String getUsesrname() {return username; }
-
-    public String getUserid() {return userid;}
-
-    public String getGroupname(){return groupname;}
-
-    public String getGroupId(){return groupid;}
-
+    public ArrayList<String> getGroupIds() {return groupids;}
 }
 
