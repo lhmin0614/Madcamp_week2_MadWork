@@ -25,6 +25,8 @@ public interface RetrofitInterface {
 
     @POST("/progress")
     Call<LoginResult> executeProgress(@Body HashMap<String, String> map);
+    @POST("/deletetodo")
+    Call<LoginResult> executeDeletetodo(@Body HashMap<String,String> map);
 
     @POST("/getcalendar")
     Call<CalendarResult> executeCalendar(@Body HashMap<String, String> map);

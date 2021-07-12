@@ -158,13 +158,13 @@ public class CalendarFrag extends Fragment {
             del_Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    removeDiary(cYear,cMonth,cDay);
                     textView2.setVisibility(View.INVISIBLE);
                     contextEditText.setText("");
                     contextEditText.setVisibility(View.VISIBLE);
                     save_Btn.setVisibility(View.VISIBLE);
                     cha_Btn.setVisibility(View.INVISIBLE);
                     del_Btn.setVisibility(View.INVISIBLE);
-                    removeDiary(cYear,cMonth+1,cDay);
                 }
             });
             if(textView2.getText()==null){

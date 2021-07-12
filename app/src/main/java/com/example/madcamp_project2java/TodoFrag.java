@@ -2,6 +2,7 @@ package com.example.madcamp_project2java;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,8 +65,15 @@ public class TodoFrag extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String worktext=parent.getAdapter().getItem(position).toString();
-                //Toast.makeText(getApplicationContext(),worktext,Toast.LENGTH_LONG).show();
                 handlelistclick(worktext);
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String worktext=parent.getAdapter().getItem(position).toString();
+                handlelistlongclick(worktext);
+                return true;
             }
         });
         return view;
@@ -160,9 +168,11 @@ public class TodoFrag extends Fragment {
         View view = getLayoutInflater().inflate(R.layout.progress_dialog, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(view);
+        //builder.setView(view).show();
 
-        builder.setView(view).show();
-
+        AlertDialog ad=builder.create();
+        ad.show();
         Button progressBtn = view.findViewById(R.id.getprogress);
         final EditText progressEdit = view.findViewById(R.id.progressedit);
 
@@ -200,7 +210,56 @@ public class TodoFrag extends Fragment {
                         Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+                ad.dismiss();
+            }
 
+        });
+
+    }
+    private void handlelistlongclick(final String worktext){
+        View view = getLayoutInflater().inflate(R.layout.tododelete_dialog, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(view);
+        AlertDialog ad=builder.create();
+        ad.show();
+
+        Button deletetodoBtn = view.findViewById(R.id.deletetodobtn);
+
+        deletetodoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+
+                HashMap<String, String> map = new HashMap<>();
+
+                map.put("worktext", worktext);
+                map.put("userID", userID);
+                Call<LoginResult> call = retrofitInterface.executeDeletetodo(map);
+
+                call.enqueue(new Callback<LoginResult>() {
+                    private Context mContext;
+                    private WorkAdapter mWorkAdapter;
+                    private ListView mListView;
+                    @Override
+                    public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                        if (response.code() == 200) {
+                            LoginResult result = response.body();
+                            mListView=(ListView) requireView().findViewById(R.id.worklist);
+                            mWorkAdapter=new WorkAdapter(mContext,result.getWork(),result.getProgress());
+                            mListView.setAdapter(mWorkAdapter);
+                        } else if (response.code() == 404) {
+                            Toast.makeText(getContext(), "Wrong Credentials",
+                                    Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResult> call, Throwable t) {
+                        Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+                ad.dismiss();
             }
         });
 
