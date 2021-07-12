@@ -85,14 +85,14 @@ public class CalendarFrag extends Fragment {
                 month=cmonth;
                 day=cday;
                 contextEditText.setText("");
-                checkDay(year,month,day,userID);
+                checkDay(year,month+1,day,userID);
             }
         });
         save_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveDiary(year,month,day);
                 str=contextEditText.getText().toString();
+                saveDiary(year,month+1,day,str);
                 textView2.setText(str);
                 save_Btn.setVisibility(View.INVISIBLE);
                 cha_Btn.setVisibility(View.VISIBLE);
@@ -104,14 +104,11 @@ public class CalendarFrag extends Fragment {
         });
         return view;
     }
-    public void  checkDay(int cYear,int cMonth,int cDay,String userID){
-
+    public void  checkDay(Integer cYear,Integer cMonth,Integer cDay,String userID){
         try{
-            HashMap<String, Integer> map = new HashMap<>();
-            map.put("group",1); //1 나중에 group number로 수정
-            map.put("year", cYear);
-            map.put("month",cMonth);
-            map.put("day",cDay);
+            HashMap<String, String> map = new HashMap<>();
+            map.put("group","1"); //===================================================================1 나중에 group number로 수정
+            map.put("date",cYear.toString()+cMonth.toString()+cDay.toString()+'_'+"1"); //===============================================1을 나중에 group number로 수정
             Call<CalendarResult> call = retrofitInterface.executeCalendar(map);
 
 
@@ -167,7 +164,7 @@ public class CalendarFrag extends Fragment {
                     save_Btn.setVisibility(View.VISIBLE);
                     cha_Btn.setVisibility(View.INVISIBLE);
                     del_Btn.setVisibility(View.INVISIBLE);
-                    removeDiary(cYear,cMonth,cDay);
+                    removeDiary(cYear,cMonth+1,cDay);
                 }
             });
             if(textView2.getText()==null){
@@ -183,26 +180,64 @@ public class CalendarFrag extends Fragment {
             e.printStackTrace();
         }
     }
+
     @SuppressLint("WrongConstant")
-    public void removeDiary(Integer year,Integer month,Integer day){
+    public void removeDiary(Integer cyear,Integer cmonth,Integer cday){
         try{
-            String content="";
-            /*
-            fos.write((content).getBytes());
-            fos.close();
-*/
+            HashMap<String, String> map = new HashMap<>();
+            map.put("group","1"); //==================================================================1 나중에 group number로 수정
+            map.put("date",cyear.toString()+cmonth.toString()+cday.toString()+'_'+"1"); //요것도
+            Call<Void> call = retrofitInterface.executeRemovecalendar(map);
+            call.enqueue(new Callback<Void>() {
+                private Context mContext;
+                private WorkAdapter mWorkAdapter;
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.code() == 200) {
+                        Toast.makeText(getContext(), "Remove success!",
+                                Toast.LENGTH_LONG).show();
+                    } else if (response.code() == 404) {
+                        Toast.makeText(getContext(), "Wrong Credentials",
+                                Toast.LENGTH_LONG).show();
+                    }
+
+                }
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
         }catch (Exception e){
             e.printStackTrace();
         }
     }
     @SuppressLint("WrongConstant")
-    public void saveDiary(Integer year,Integer month,Integer day){
+    public void saveDiary(Integer cyear,Integer cmonth,Integer cday,String text){
         try{
-            /*
-            String content=contextEditText.getText().toString();
-            fos.write((content).getBytes());
-            fos.close();
-             */
+            HashMap<String, String> map = new HashMap<>();
+            map.put("group","1"); //==================================================================1 나중에 group number로 수정
+            map.put("date",cyear.toString()+cmonth.toString()+cday.toString()+'_'+"1");
+            map.put("text",text);
+            Call<Void> call = retrofitInterface.executeSavecalendar(map);
+            call.enqueue(new Callback<Void>() {
+                private Context mContext;
+                private WorkAdapter mWorkAdapter;
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.code() == 200) {
+                        Toast.makeText(getContext(), "Save success!",
+                                Toast.LENGTH_LONG).show();
+                    } else if (response.code() == 404) {
+                        Toast.makeText(getContext(), "Wrong Credentials",
+                                Toast.LENGTH_LONG).show();
+                    }
+
+                }
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
         }catch (Exception e){
             e.printStackTrace();
         }

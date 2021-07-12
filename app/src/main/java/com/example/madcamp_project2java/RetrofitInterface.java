@@ -27,13 +27,13 @@ public interface RetrofitInterface {
     Call<LoginResult> executeProgress(@Body HashMap<String, String> map);
 
     @POST("/getcalendar")
-    Call<CalendarResult> executeCalendar(@Body HashMap<String, Integer> map);
+    Call<CalendarResult> executeCalendar(@Body HashMap<String, String> map);
 
     @POST("/savecalendar")
-    Call<Void> executeSavecalendar(@Body HashMap<String, Integer> map);
+    Call<Void> executeSavecalendar(@Body HashMap<String, String> map);
 
     @POST("/removecalendar")
-    Call<Void> executeRemovecalendar(@Body HashMap<String, Integer> map);
+    Call<Void> executeRemovecalendar(@Body HashMap<String, String> map);
 
     //@POST("/grouplist")
     //Call<> executeJoinGroup(@Body HashMap<String, String> map);
