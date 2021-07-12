@@ -16,4 +16,25 @@ public interface RetrofitInterface {
 
     @POST("/googleLogin")
     Call<LoginResult> executegoogleLogin(@Body HashMap<String, String> map);
+
+    @POST("/joingroup")
+    Call<JoinGroupResult> executeJoinGroup(@Body HashMap<String, String> map);
+
+    @POST("/work")
+    Call<LoginResult> executeSendText(@Body HashMap<String, String> map);
+
+    @POST("/progress")
+    Call<LoginResult> executeProgress(@Body HashMap<String, String> map);
+
+    @POST("/getcalendar")
+    Call<CalendarResult> executeCalendar(@Body HashMap<String, Integer> map);
+
+    @POST("/savecalendar")
+    Call<Void> executeSavecalendar(@Body HashMap<String, Integer> map);
+
+    @POST("/removecalendar")
+    Call<Void> executeRemovecalendar(@Body HashMap<String, Integer> map);
+
+    //@POST("/grouplist")
+    //Call<> executeJoinGroup(@Body HashMap<String, String> map);
 }

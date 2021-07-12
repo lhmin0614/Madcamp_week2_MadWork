@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -72,9 +73,14 @@ public class SignupActivity extends AppCompatActivity {
                             //login succes
                             Log.i("login", "login success");
                             Log.i("response", response.toString());
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            intent.putExtra("name", nameEdit.getText().toString());
+                            intent.putExtra("UserID", emailEdit.getText().toString());
+                            startActivity(intent);
                         } else if (response.code() == 404) {
                             //login fail
-                            Log.i("login", "login fail");
+                            Log.i("login", "ID already exists");
+                            Toast.makeText(getApplicationContext(), "이미 계정이 존재하는 이메일입니다", Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override

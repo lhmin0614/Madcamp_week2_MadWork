@@ -1,5 +1,7 @@
 package com.example.madcamp_project2java;
 
+import java.util.ArrayList;
+
 public class LoginResult {
 
     private String name;
@@ -23,5 +25,15 @@ public class LoginResult {
     }
     public String getApprove_pw(){
         return approve_pw;
+    }
+
+    private ArrayList<String> work;
+    private ArrayList<Integer> progress;
+
+    public ArrayList<String> getWork() {
+        return work;
+    }
+    public ArrayList<Integer> getProgress(){
+        return progress;
     }
 }

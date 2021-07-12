@@ -15,12 +15,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -31,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.util.HashMap;
 
 import retrofit2.Response;
@@ -54,39 +49,38 @@ public class LoginActivity_retrofit extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_login_retrofit);
-            mContext = this;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login_retrofit);
+        mContext = this;
 
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-            retrofitInterface = retrofit.create(RetrofitInterface.class);
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-            //login
-            handleLoginDialog();
+        //login
+        handleLoginDialog();
 
-            //google login
-            RC_SIGN_IN = 369;
-            googleLoginBtn = findViewById(R.id.google_button);
-            // setting login option
-            // DEFAULT_SIGN_IN : user id & profile data
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestEmail() // request email address
-                    .build();
-            GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        //google login
+        RC_SIGN_IN = 369;
+        googleLoginBtn = findViewById(R.id.google_button);
+        // setting login option
+        // DEFAULT_SIGN_IN : user id & profile data
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail() // request email address
+                .build();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-            googleLoginBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v){
-                    Intent signinIntent = mGoogleSignInClient.getSignInIntent();
-                    startActivityForResult(signinIntent, RC_SIGN_IN);
-                }
-            });
-        }
-
+        googleLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signinIntent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(signinIntent, RC_SIGN_IN);
+            }
+        });
+    }
         private void handleLoginDialog() {
 
             View view = getLayoutInflater().inflate(R.layout.activity_login_retrofit, null);
@@ -134,7 +128,7 @@ public class LoginActivity_retrofit extends AppCompatActivity {
                                 }else{
                                     //login success
                                     Log.i("login success", "id password OK");
-                                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                                    Intent intent = new Intent(getBaseContext(), JoinGroup.class);
                                     intent.putExtra("name", "hyemin");
                                     intent.putExtra("UserID", "lhmin1");
                                     startActivity(intent);
@@ -214,7 +208,7 @@ public class LoginActivity_retrofit extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "새로운 계정을 생성하였습니다", Toast.LENGTH_LONG).show();
                         }
 
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        Intent intent = new Intent(getBaseContext(), JoinGroup.class);
                         intent.putExtra("name", personName);
                         intent.putExtra("UserID", personEmail);
                         startActivity(intent);
