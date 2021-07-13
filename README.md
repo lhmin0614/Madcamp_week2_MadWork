@@ -56,6 +56,7 @@
 ## To-do List
 
 > 자신만의 To-do List를 이용해 바쁜 몰입캠프 생활을 효율적으로 보낼 수 있습니다.
+> 
  <img src = "https://user-images.githubusercontent.com/59908066/125464257-7033d61f-947e-49f4-9405-0c2db3de3e4f.jpg" width = "190" height = "400" > <img src = "https://user-images.githubusercontent.com/59908066/125464262-2d906a3d-68b2-4050-bf14-11205bc692a4.jpg" width = "190" height = "400" > <img src = "https://user-images.githubusercontent.com/59908066/125464263-39bad13f-6117-4c51-9a0a-b5b691fe9350.jpg" width = "190" height = "400" > <img src = "https://user-images.githubusercontent.com/59908066/125464265-e5c04df4-705f-4948-88f2-a8680e5dbd0c.jpg" width = "190" height = "400" > <img src = "https://user-images.githubusercontent.com/59908066/125464267-eedc5e05-e498-43b8-937f-e6a5dd26e35b.jpg" width = "190" height = "400" >
  
  - To-do List는 group이 아닌 개인별로 저장됩니다.
