@@ -221,6 +221,7 @@ io.sockets.on('connection', (socket) => {
                         type: typedata,
                         content: results[i].content,
                         sendTime: results[i].SendTime,
+                        profile: results[i].UserProfile,
                         to: null,
                         userid: null,
                         from: results[i].UserName
@@ -261,9 +262,10 @@ io.sockets.on('connection', (socket) => {
         const roomnumber = messageData.to;
         const content = messageData.content;
         const sendtime = messageData.sendTime;
+        const profile = messageData.profile;
 
-        sql = "INSERT INTO message(GroupID, UserID, UserName, content, SendTime) VALUES (?,?,?,?,?)"
-        chat_conn.query(sql, [roomnumber, userid, username, content, sendtime], function (error, results, fields) {
+        sql = "INSERT INTO message(GroupID, UserID, UserProfile, UserName, content, SendTime) VALUES (?,?,?, ?,?,?)"
+        chat_conn.query(sql, [roomnumber, userid,  profile, username,content, sendtime], function (error, results, fields) {
             if (error) {
                 console.log(error);
             }
@@ -288,8 +290,8 @@ app.post('/signup', (req, res) => {
         }
         else {
             //create new ID
-            sql = "INSERT INTO user VALUES (?, ? ,?, ?)";
-            connection3.query(sql, [req.body.id, req.body.name, "1", req.body.pw], function (error, results, fields) {
+            sql = "INSERT INTO user VALUES (?, ? ,?, ?, ?)";
+            connection3.query(sql, [req.body.id, req.body.name, req.body.profile, "1", req.body.pw], function (error, results, fields) {
                 if (error) {
                     console.log(error);
                 }
@@ -297,7 +299,7 @@ app.post('/signup', (req, res) => {
             })
         }
     })
-    var approve = { 'approve_id': 'OK', 'approve_pw': 'OK' };
+    var approve = { 'approve_id': 'OK', 'approve_pw': 'OK' , profile :req.body.profile};
     res.status(200).send(approve);
     console.log("Signup success");
 })
@@ -308,6 +310,7 @@ app.post('/login', (req, res) => {
     var approve_id = "NO";
     var approve_pw = "NO"
     var name = ""
+    var profile = ""
 
     connection3.query(sql, [req.body.id], function (error, result, fields) {
         if (error) {
@@ -319,8 +322,9 @@ app.post('/login', (req, res) => {
             if (result[0].UserPassword == req.body.pw)
                 approve_pw = "YES"
             name = result[0].UserName
+            profile = result[0].UserProfile
         }
-        res.send({ approve_id: approve_id, approve_pw: approve_pw, name: name });
+        res.send({ approve_id: approve_id, approve_pw: approve_pw, name: name , profile : profile});
         console.log("Login success");
     })
 })
@@ -339,8 +343,8 @@ app.post('/googleLogin', (req, res) => {
             approve_id = "YES";
         } else {
             //구글 ㄱㅖ정으로 등록
-            var sql = "INSERT INTO user VALUES (?, ? ,?, ?)";
-            connection3.query(sql, [req.body.id, req.body.name, "0", ""], function (error, results, fields) {
+            var sql = "INSERT INTO user VALUES (?, ? ,?, ?, ?)";
+            connection3.query(sql, [req.body.id, req.body.name, "user", "0", "" ] , function (error, results, fields) {
                 if (error) {
                     console.log(error);
                 }

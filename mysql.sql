@@ -38,6 +38,7 @@ USE loginDB;
 CREATE TABLE user(
     UserID CHAR(25) PRIMARY KEY,
     UserName VARCHAR(25) NOT NULL,
+    UserProfile CHAR(25) NOT NULL,
     Flag BOOLEAN NOT NULL,
     UserPassword VARCHAR(25) DEFAULT NULL
 );
@@ -54,6 +55,7 @@ CREATE TABLE message(
     GroupID CHAR(10) NOT NULL,
     UserID CHAR(25) NOT NULL,
     UserName VARCHAR(25) NOT NULL,
+    UserProfile CHAR(25) NOT NULL,
     content CHAR(100),
     SendTime CHAR(25) NOT NULL
 );
