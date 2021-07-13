@@ -135,7 +135,7 @@ public class LoginActivity_retrofit extends AppCompatActivity {
                                     Intent intent = new Intent(getBaseContext(), JoinGroup.class);
                                     intent.putExtra("name", response.body().getName());
                                     Log.i("profile", response.body().getProfile());
-                                    intent.putExtra("profile", response.body().getProfile());
+                                    intent.putExtra("profile", "user");
                                     intent.putExtra("UserID", emailEdit.getText().toString());
                                     startActivity(intent);
                                 }
@@ -217,7 +217,7 @@ public class LoginActivity_retrofit extends AppCompatActivity {
                         Intent intent = new Intent(getBaseContext(), JoinGroup.class);
                         intent.putExtra("name", personName);
                         intent.putExtra("UserID", personEmail);
-                        intent.putExtra("profile", response.body().getProfile());
+                        intent.putExtra("profile","user");
                         startActivity(intent);
 
                     } else if (response.code() == 404) {

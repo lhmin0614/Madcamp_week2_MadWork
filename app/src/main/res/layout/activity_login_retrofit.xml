@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:gravity="center_vertical"
     android:focusable="true"
     android:focusableInTouchMode="true" >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:srcCompat="@drawable/madwork_logo"
+        android:layout_gravity="center_horizontal"
+        android:elevation = "10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

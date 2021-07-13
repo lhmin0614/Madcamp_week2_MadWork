@@ -92,6 +92,7 @@ public class JoinGroup extends AppCompatActivity {
                             listview.setAdapter(adapter);
                             listview.setOnItemClickListener(listener);
                         }
+                        editGroupName.setText("");
                     }
                     @Override
                     public void onFailure(Call<LoginResult> call, Throwable t) {
