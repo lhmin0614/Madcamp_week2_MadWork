@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     String UserID;
     String roomNumber;
     String roomName;
+    String userprofile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity
         UserID = intent.getStringExtra("UserID");
         roomNumber = intent.getStringExtra("groupID");
         roomName = intent.getStringExtra("groupName");
+        userprofile = intent.getStringExtra("profile");
 
 
         bottomNavigationView = findViewById(R.id.bottomNavi);
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity
                 bundle.putString("UserID", UserID);
                 bundle.putString("roomNumber", roomNumber);
                 bundle.putString("groupName", roomName);
+                bundle.putString("profile", userprofile);
                 chf.setArguments(bundle);
                 ft.replace(R.id.Main_Frame,chf);
                 ft.commit();

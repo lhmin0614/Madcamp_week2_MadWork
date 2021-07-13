@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -26,6 +29,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText emailEdit;
     EditText passwordEdit;
     EditText nameEdit;
+    String profile;
     private String BASE_URL = "http://192.249.18.124:443";
     //private String BASE_URL = "http://172.10.18.165:80";
 
@@ -53,6 +57,32 @@ public class SignupActivity extends AppCompatActivity {
 
     private void handleSignup(){
         View view = getLayoutInflater().inflate(R.layout.activity_signup, null);
+
+        profile = "user";
+        final ArrayList<String>[] profileList = new ArrayList[]{new ArrayList<String>(Arrays.asList("duck", "nupjuk", "user", "cat", "boy", "girl"))};
+
+        CheckBox checkBox1 = (CheckBox) findViewById(R.id.check_box1) ;
+        CheckBox checkBox2 = (CheckBox) findViewById(R.id.check_box2) ;
+        CheckBox checkBox3 = (CheckBox) findViewById(R.id.check_box3) ;
+        CheckBox checkBox4 = (CheckBox) findViewById(R.id.check_box4) ;
+        CheckBox checkBox5 = (CheckBox) findViewById(R.id.check_box5) ;
+        CheckBox checkBox6 = (CheckBox) findViewById(R.id.check_box6) ;
+        final CheckBox[] currentBox = {(CheckBox) findViewById(R.id.check_box1)};
+        ArrayList<CheckBox> checkBoxList = new ArrayList<CheckBox>(Arrays.asList(checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6));
+        for(final Integer[] i = {0}; i[0] <checkBoxList.size(); i[0]++){
+            Integer finalI = i[0];
+            checkBoxList.get(i[0]).setOnClickListener(new CheckBox.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    currentBox[0].setChecked(false); //이전 선태개 버튼 선택 해제
+                    checkBoxList.get(finalI).setChecked(true) ;
+                    currentBox[0] = checkBoxList.get(finalI);
+                    profile = profileList[0].get(finalI);
+                }
+            });
+        }
+
+
         doneBtn = (Button) findViewById(R.id.done);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +93,7 @@ public class SignupActivity extends AppCompatActivity {
                 map.put("id", emailEdit.getText().toString());
                 map.put("pw", passwordEdit.getText().toString());
                 map.put("name", nameEdit.getText().toString());
+                map.put("profile", profile);
 
                 Call<SignupResult> call = retrofitInterface.executeSignup(map);
 
@@ -76,6 +107,8 @@ public class SignupActivity extends AppCompatActivity {
                             Intent intent = new Intent(getBaseContext(), JoinGroup.class);
                             intent.putExtra("name", nameEdit.getText().toString());
                             intent.putExtra("UserID", emailEdit.getText().toString());
+                            Log.i("SignupActivityProfile", profile);
+                            intent.putExtra("profile", profile);
                             startActivity(intent);
                         } else if (response.code() == 404) {
                             //login fail

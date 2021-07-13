@@ -90,6 +90,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView nameText;
         TextView contentText;
         TextView sendTimeText;
+        View avatar;
 
         public LeftViewHolder(View itemView) {
             super(itemView);
@@ -97,12 +98,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             nameText = itemView.findViewById(R.id.name);
             contentText = itemView.findViewById(R.id.message_body);
             sendTimeText = itemView.findViewById(R.id.send_time_text);
+            avatar = itemView.findViewById(R.id.avatar);
         }
 
         public void setItem(ChatItem item){
             nameText.setText(item.getName());
             contentText.setText(item.getContent());
             sendTimeText.setText(item.getSendTime());
+            int resID = context.getResources().getIdentifier(item.getProfile(), "drawable", context.getPackageName());
+            avatar.setBackgroundResource(resID);
         }
     }
 
@@ -112,7 +116,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public RightViewHolder(View itemView) {
             super(itemView);
-
             contentText = itemView.findViewById(R.id.message_body);
             sendTimeText = itemView.findViewById(R.id.send_time_text);
         }
