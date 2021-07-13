@@ -20,6 +20,8 @@ import androidx.fragment.app.Fragment;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -71,6 +73,29 @@ public class CalendarFrag extends Fragment {
         String name="kimjh5182";
         //final String userID=intent.getStringExtra("userID");
         final String userID="kimjh5182";
+        //초기화
+        long now=System.currentTimeMillis();
+        Date date=new Date(now);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy");
+        String yearstr=sdf.format(date);
+        sdf=new SimpleDateFormat("MM");
+        String monthstr=sdf.format(date);
+        sdf=new SimpleDateFormat("dd");
+        String daystr=sdf.format(date);
+
+        diaryTextView.setVisibility(View.VISIBLE);
+        save_Btn.setVisibility(View.VISIBLE);
+        contextEditText.setVisibility(View.VISIBLE);
+        textView2.setVisibility(View.INVISIBLE);
+        cha_Btn.setVisibility(View.INVISIBLE);
+        del_Btn.setVisibility(View.INVISIBLE);
+        year=Integer.parseInt(yearstr);
+        month=Integer.parseInt(monthstr);
+        day=Integer.parseInt(daystr);
+        diaryTextView.setText(String.format("%d / %d / %d",year,month,day));
+        contextEditText.setText("");
+        checkDay(year,month,day,userID);
+        //초기화 끝
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -108,8 +133,8 @@ public class CalendarFrag extends Fragment {
     public void  checkDay(Integer cYear,Integer cMonth,Integer cDay,String userID){
         try{
             HashMap<String, String> map = new HashMap<>();
-            map.put("group",roomNumber.toString()); //===================================================================1 나중에 group number로 수정
-            map.put("date",cYear.toString()+cMonth.toString()+cDay.toString()+'_'+roomNumber.toString()); //===============================================1을 나중에 group number로 수정
+            map.put("group",roomNumber.toString());
+            map.put("date",cYear.toString()+cMonth.toString()+cDay.toString()+'_'+roomNumber.toString());
             Call<CalendarResult> call = retrofitInterface.executeCalendar(map);
 
 
