@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MadCamp_Project2java" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#ec77ab</item>
+        <item name="colorPrimaryVariant">#7873f5</item>
+        <item name="colorOnPrimary">#ac75d4</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#ec77ab</item>
+        <item name="colorSecondaryVariant">#7873f5</item>
+        <item name="colorOnSecondary">#ac75d4</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="windowNoTitle">true</item>
+        <!-- Customize your theme here. -->
+
+    </style>
+
+</resources>

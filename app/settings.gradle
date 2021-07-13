@@ -1,0 +1,2 @@
+rootProject.name = "MadCamp_Project2(java)"
+include ':app'

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipToPadding="false"
+    android:focusableInTouchMode="true"
+    tools:context="com.example.madcamp_project2java.MainActivity">
+
+
+    <TextView
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:id="@+id/chattitle"
+        android:gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:text="Chat"
+        android:textSize="30dp"
+        android:layout_marginHorizontal="20dp"/>
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/chatsubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="defualt text"
+        android:textSize="16dp"
+        android:layout_below="@id/todotitle"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginBottom="10dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight = "2"
+        android:divider="#fff"
+        >
+    </androidx.recyclerview.widget.RecyclerView>
+<!--    <ListView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:id="@+id/messages_view"-->
+<!--        android:layout_weight="2"-->
+<!--        android:divider="#fff"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        />-->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ems="10"
+            android:hint="Write a message"
+            android:inputType="text"
+            android:paddingHorizontal="10dp"
+            android:text="" />
+
+        <ImageButton
+            android:id = "@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:padding="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/ic_send_black_24dp" />
+    </LinearLayout>
+</LinearLayout>
