@@ -8,6 +8,8 @@ public class LoginResult {
 
     private String email;
 
+    private String profile;
+
     private String approve_id;
 
     private String approve_pw;
@@ -26,6 +28,8 @@ public class LoginResult {
     public String getApprove_pw(){
         return approve_pw;
     }
+
+    public String getProfile() {return profile;}
 
     private ArrayList<String> work;
     private ArrayList<Integer> progress;

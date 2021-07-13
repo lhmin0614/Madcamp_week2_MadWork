@@ -36,6 +36,7 @@ public class ChatFrag extends Fragment {
     private String username;
     private String roomNumber;
     private String userID;
+    private String profile;
     private ChatAdapter adapter;
     private Gson gson = new Gson();
     SimpleDateFormat format;
@@ -73,6 +74,9 @@ public class ChatFrag extends Fragment {
         username = bundle.getString("username");
         roomNumber = bundle.getString("groupName");
         userID = bundle.getString("UserID");
+        profile = bundle.getString("profile");
+
+        Log.i("profile is ", profile);
 
         TextView representingRoom = view.findViewById(R.id.chatsubtitle);
         representingRoom.setText("Room for "+ roomNumber);
@@ -134,14 +138,14 @@ public class ChatFrag extends Fragment {
                 //adapter.addItem(new ChatItem(data.getFrom(), data.getContent(),data.getSendTime(), 1)); //center msg
                 //recyclerView.scrollToPosition(adapter.getItemCount() - 1);
             } else if (data.getType().equals("LEFT")){
-                adapter.addItem(new ChatItem(data.getFrom(), data.getContent(), data.getSendTime(), 2)); //center msg
+                adapter.addItem(new ChatItem(data.getFrom(), data.getProfile(),data.getContent(), data.getSendTime(), 2)); //center msg
                 recyclerView.scrollToPosition(adapter.getItemCount() - 1);
             }
             else if (data.getType().equals("IMAGE")) {
-                adapter.addItem(new ChatItem(data.getFrom(), data.getContent(), data.getSendTime(), 3)); //left image
+                adapter.addItem(new ChatItem(data.getFrom(), data.getProfile(), data.getContent(), data.getSendTime(), 3)); //left image
                 recyclerView.scrollToPosition(adapter.getItemCount() - 1);
             } else {
-                adapter.addItem(new ChatItem(data.getFrom(), data.getContent(), data.getSendTime(), 0)); //left msg
+                adapter.addItem(new ChatItem(data.getFrom(), data.getProfile(),data.getContent(), data.getSendTime(), 0)); //left msg
                 recyclerView.scrollToPosition(adapter.getItemCount() - 1);
             }
         });
@@ -151,17 +155,19 @@ public class ChatFrag extends Fragment {
         mSocket.emit("newMessage", gson.toJson(new MessageData("MESSAGE",
                 username,
                 userID,
+                profile,
                 roomNumber,
                 editText.getText().toString(),
                 format.format(System.currentTimeMillis()))));
         Log.d("MESSAGE", new MessageData("MESSAGE",
                 username,
                 userID,
+                profile,
                 roomNumber,
                 editText.getText().toString(),
                 format.format(System.currentTimeMillis())).toString());
         Log.d("MESSAGE text", editText.getText().toString());
-        adapter.addItem(new ChatItem(username, editText.getText().toString(), format.format(System.currentTimeMillis()), 2)); //right text
+        adapter.addItem(new ChatItem(username, profile, editText.getText().toString(), format.format(System.currentTimeMillis()), 2)); //right text
         recyclerView.scrollToPosition(adapter.getItemCount() - 1);
         editText.setText("");
     }

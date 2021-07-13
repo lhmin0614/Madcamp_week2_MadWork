@@ -30,6 +30,7 @@ public class JoinGroup extends AppCompatActivity {
     String UserID;
     String groupID;
     String groupName;
+    String profile;
     Button createGroup;
     ListView listview;
     EditText editGroupName;
@@ -49,6 +50,7 @@ public class JoinGroup extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra("name");
         UserID = intent.getStringExtra("UserID");
+        profile = intent.getStringExtra("profile");
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -138,6 +140,7 @@ public class JoinGroup extends AppCompatActivity {
             group_to_main.putExtra("name", username);
             group_to_main.putExtra("UserID", UserID);
             group_to_main.putExtra("groupID", "1");
+            group_to_main.putExtra("profile", profile);
             group_to_main.putExtra("groupName", mDatas.get(position));
             startActivity(group_to_main);
         }

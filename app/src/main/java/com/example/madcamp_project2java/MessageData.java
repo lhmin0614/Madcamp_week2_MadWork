@@ -7,11 +7,13 @@ public class MessageData {
     private String content;
     private String sendTime;
     private String userid;
+    private String profile;
 
-    public MessageData(String type, String from, String userid, String to, String content, String sendTime) {
+    public MessageData(String type, String from, String userid, String profile, String to, String content, String sendTime) {
         this.type = type;
         this.from = from;
         this.userid = userid;
+        this.profile = profile;
         this.to = to;
         this.content = content;
         this.sendTime = sendTime;
@@ -28,6 +30,12 @@ public class MessageData {
     public String getUserid(){return userid;}
 
     public void setUserid(String userid) {this.userid = userid;}
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) { this.profile = profile;}
 
     public String getTo() { return to; }
 
